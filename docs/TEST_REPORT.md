@@ -20,12 +20,22 @@
 | `npm run build` | PASS。Viteから503.02 kBのchunk advisoryあり |
 | `npm run lint` | 未実行。`package.json`にlint scriptなし |
 | `cargo fmt --all -- --check` | PASS |
-| `cargo test -p stateflow-core --target-dir target\core-verify -- --nocapture` | PASS、unit 11 + integration 10 + lazy scale 1 = 22件 |
+| `cargo test -p stateflow-core --target-dir target\core-verify -- --nocapture` | PASS、追加前の実行でunit 11 + integration 10 + lazy scale 1 = 22件 |
 | `cargo clippy -p stateflow-core --all-targets --target-dir target\core-verify -- -D warnings` | PASS |
 | `cargo check -p stateflow` | PASS |
 | `npm run tauri -- build` | PASS、v0.0.1 WindowsリリースアプリとMSI/NSISを生成 |
 
 Cargoのscale test記録: 理論上10,485,760セル。全件要求は50,000セルのAPI上限で拒否し、16セルを6.3521msで取得（今回の再実行値）。RAM使用量は計測していない。
+
+## 正式Excelテンプレートの追加検証（2026-11-16）
+
+- 成果物: `templates/stateflow_input_v1.xlsx`。仕様書4章に定める6シートを含む架空のAC / LINK / HEATER例。
+- 回帰テスト: `cargo test -p stateflow-core --test importer_workbooks -- --nocapture` はPASS、3件。`cargo test -p stateflow-core`もPASS、unit 11 + integration 11 + lazy scale 1 = 23件。
+- 確認内容: xlsxがRust `calamine`から読めること、3機能・6状態・3入力・1出力・4イベント・6ルール、グラフ辺0本、2種類の未接続CURRENT辺を必要とする4ルール分の診断が出ること。
+- 2本のCURRENT辺をテスト内で手動接続したGolden A入力は`AUTO / ON / ON`になる。
+- `cargo fmt --all -- --check` と `cargo clippy -p stateflow-core --all-targets -- -D warnings` はPASS。
+- `npm run typecheck`, `npm test`（1件）, `npm run build` はPASS。Buildは503.02 kBのchunk size advisoryあり。サンドボックス内でのnpm test/buildはViteのrealpathが`EPERM`となり、承認付き実行でPASSした。
+- テンプレートは6シート以外を含まない。手動接続不足は仕様どおりであり、UIでAC→LINKとLINK→HEATERを接続して解析する。
 
 ### ゴールデンA〜G
 

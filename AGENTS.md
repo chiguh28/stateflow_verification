@@ -1,6 +1,6 @@
 # AGENTS.md — STATEFLOW Codex 開発ルール
 
-このリポジトリを変更する全てのCodexエージェントは、**最初に `STATEFLOW_実装指示書.md` と `references/STATEFLOW_UI_Prototype_v6.html` を読むこと**。本ファイルは短縮ガードレールであり、詳細な受入条件は仕様書が優先する。
+このリポジトリを変更する全てのCodexエージェントは、**最初に `STATEFLOW_実装指示書.md` と `references/STATEFLOW_UI_Prototype_v6.html` を読むこと**。その後のコード探索では、まず `docs/AI_HANDOFF.md` と `docs/ARCHITECTURE.md` をコードマップとして使い、必要な実装箇所に絞ってソースを確認すること。これらの要約資料は仕様書の要件やv6 UIの正を置き換えない。本ファイルは短縮ガードレールであり、詳細な受入条件は仕様書が優先する。
 
 ## 絶対ルール
 

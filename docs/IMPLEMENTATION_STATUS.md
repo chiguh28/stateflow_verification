@@ -17,6 +17,12 @@ Rust + Tauri 2 + React/TypeScript のアプリ実装、Windows用MSI/NSISビル�
 - [x] **Phase 6 — レビュー/判定/CSV**: 候補抽出、判定とメモ、判定の保存/再読込、候補CSVとマトリクスCSVを実画面で確認した。Golden A/Bシナリオでレビュー候補は21件。
 - [~] **Phase 7 — QAと納品**: Windows Tauriリリースビルド、MSI/NSIS生成、実行ファイル起動、6画面の基本スモークと証跡保存を実施。高DPI、キーボード/フォーカス、3サイズでのUI比較、インストーラーの実インストールは未確認。
 
+## 引き継ぎ資料・入力テンプレート
+
+- [x] `docs/AI_HANDOFF.md` — 別AI向けのコードマップ、守る契約、現状の未完了点、再開手順を整理。
+- [x] `docs/ARCHITECTURE.md` — 実装済み責務、データフロー、解析・保存・IPC設計をソース位置つきで整理。
+- [x] `templates/stateflow_input_v1.xlsx` — 仕様書4章の6シート形式で作成。Excel取込テストに追加し、手動グラフ接続が必要なサンプルとして検証。
+
 ## 主要契約の実装
 
 - マトリクスはイベントを縦、状態組み合わせの機能別現在状態を横に表示し、各セルには次状態を表示する。
@@ -26,6 +32,7 @@ Rust + Tauri 2 + React/TypeScript のアプリ実装、Windows用MSI/NSISビル�
 - ガードはRustのパーサと型検証で扱う。TypeScript側に本番解析計算を置かない。
 - 直積は遅延生成し、セル窓APIと50,000セル上限を通す。無制限の全件転送を行わない。
 - 状態維持や候補を設計不具合確定・デッドロック確定と表示しない。
+- R03（実行順序による未反映）はenum/UI表示までで候補抽出未実装。AI引き継ぎ書に記録し、ON表示を実装済みと誤認しない。
 
 ## QA証跡
 
@@ -33,6 +40,8 @@ Rust + Tauri 2 + React/TypeScript のアプリ実装、Windows用MSI/NSISビル�
 - [matrix-golden-b.png](qa/matrix-golden-b.png): 前回出力ONで AUTO / ON / OFF。
 - [graph-wired-release.png](qa/graph-wired-release.png): リリースアプリでAC → LINK → HEATERを手動接続。
 - [TEST_REPORT.md](TEST_REPORT.md): 実行コマンド、環境、結果、未確認事項。
+- [AI_HANDOFF.md](AI_HANDOFF.md) / [ARCHITECTURE.md](ARCHITECTURE.md): 次のAI向けに実装意図とコード位置を整理。
+- `../templates/stateflow_input_v1.xlsx`: 正式入力形式v1のサンプル。
 
 ## 残作業
 
