@@ -1,0 +1,13 @@
+:root {
+  color-scheme: light;
+  --red: #e82127;
+  --ink: #171a20;
+  --muted: #777d86;
+  --bg: #f4f5f6;
+  --line: #e3e5e8;
+  --soft: #fafafa;
+  --white: #fff;
+  --hold: #e7e9eb;
+  --warn: #fff0f0;
+  --font: Inter, "Noto Sans JP", "Yu Gothic", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}

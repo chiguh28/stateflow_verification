@@ -1,0 +1,21 @@
+[package]
+name = "stateflow"
+version = "0.0.1"
+description = "Local state transition linkage analyzer"
+authors = ["STATEFLOW"]
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lib]
+name = "stateflow_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "=2.6.3", features = [] }
+
+[dependencies]
+stateflow-core = { path = "../crates/stateflow-core" }
+serde.workspace = true
+tauri = { version = "=2.11.5", features = [] }
+tauri-plugin-dialog = "=2.7.0"

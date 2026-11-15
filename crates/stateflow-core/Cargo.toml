@@ -1,0 +1,15 @@
+[package]
+name = "stateflow-core"
+version = "0.0.1"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+calamine = "=0.35.0"
+sha2 = "0.10"
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+time = { version = "=0.3.45", features = ["formatting"] }
+uuid = { version = "1", features = ["v4"] }

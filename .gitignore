@@ -1,0 +1,16 @@
+node_modules/
+dist/
+target/
+src-tauri/target/
+.vite/
+*.stateflow.json
+.env*
+!.env.example
+auth.json
+*.sqlite*
+*.db
+*.log
+coverage/
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
