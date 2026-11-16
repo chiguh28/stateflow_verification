@@ -79,3 +79,11 @@
 - **理由:** BATだけに依存管理、Visual Studio環境の取込、再実行時の依存判定を詰め込まず、Windows PowerShell 5.1で読める個別処理として保守できる。Rustの既定toolchainを変えず、起動プロセスだけMSVC toolchainを選ぶ。
 - **制約:** Windows 10/11、winget、ネット接続が必要。Visual Studio Build Toolsの導入時はUAC承認と数GBの空き容量が必要。組織ポリシーやオフライン環境では自動導入できない。
 - **残るリスク:** clean Windows環境でのwinget初回インストールは、この開発機では再現できないため別環境で確認が必要。WebView2 Runtimeは多くのWindows 10/11に同梱されるが、ランタイム未導入環境では追加ダウンロードが発生する。
+
+### D-011: 旧Excel参照サンプルにも現行必須シートを含める
+
+- **背景:** `references/standard_input_template_legacy.xlsx` は `Outputs` と `Events` がなく、遷移の `priority` も空欄だった。現行入力契約の参照例として使うには必須定義が不足していた。
+- **採用判断:** 既存サンプルの遷移条件は変えず、`Outputs` に `HEATER_CMD`、`Events` に各入力の変化例を追加する。既存6ルールのpriorityは10に揃え、READMEと参照ブックを現行必須仕様へ合わせる。正式版の列定義とサンプルは引き続き `templates/stateflow_input_v1.xlsx` を正とする。
+- **理由:** 参照ブックを入力形式の欠落シート例として扱わず、必要シートと遷移優先度を確認できるようにするため。
+- **確認:** Artifact Toolで編集前後のブックを読み込み、追加シート・値・表示を確認した。Rustテストとビルドは実行していない。
+- **残るリスク:** 旧サンプルは正式テンプレートと異なる列構成のままなので、新しい入力ブックの作成には正式テンプレートを使う。

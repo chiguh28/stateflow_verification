@@ -261,19 +261,15 @@ fn golden_g_each_event_uses_the_same_independent_starting_state() {
 }
 
 #[test]
-fn legacy_workbook_is_rejected_with_missing_formal_sheets_reported() {
+fn reference_workbook_contains_output_and_event_definitions() {
     let workbook = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("..")
         .join("..")
         .join("references")
         .join("standard_input_template_legacy.xlsx");
-    let result = import_excel_files(&[workbook]).expect("legacy workbook should be inspectable");
-    for sheet in ["Outputs", "Events"] {
-        assert!(
-            result
-                .diagnostics
-                .iter()
-                .any(|diagnostic| diagnostic.message.contains(sheet))
-        );
-    }
+    let result = import_excel_files(&[workbook]).expect("reference workbook should be inspectable");
+
+    assert_eq!(result.project.outputs.len(), 1);
+    assert_eq!(result.project.events.len(), 6);
+    assert_eq!(result.project.transitions.len(), 6);
 }

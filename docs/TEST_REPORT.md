@@ -78,6 +78,14 @@ Cargoのscale test記録: 理論上10,485,760セル。全件要求は50,000セ�
 - `git diff --check`: PASS。
 - PowerShell 7のparser check: PASS。BAT経由でWindows PowerShell 5.1の実行とTauri dev起動も確認した。
 
+## 参照Excelの必須シート補完（2026-11-16）
+
+- 成果物: `references/standard_input_template_legacy.xlsx`。
+- `Outputs` に `HEATER_CMD` の宣言、`Events` にAUTO_SW / LINK_ENABLEのON・OFF変化とSPEEDの30 km/h境界変化を追加した。既存6ルールのpriorityは必須列仕様に合わせて10に設定した。
+- Artifact Toolで編集前後のシートと値を読み込み、README / Outputs / Eventsを描画して確認した。既存Machines / States / Inputsの値は保持され、遷移条件も変更していない。
+- `git diff --check`: PASS。
+- Rust / frontendのテスト、lint、ビルドは未実行。この依頼ではExcelの更新とpushを求められ、テスト実行は依頼されていない。
+
 ## 未確認・制約
 
 - `package.json`にlint scriptがないため、npm lint相当は実行していない。

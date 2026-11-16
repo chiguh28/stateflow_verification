@@ -265,7 +265,7 @@ stateflow/
 
 ### 4.1 原則
 
-- 同梱の `references/standard_input_template_legacy.xlsx` は、以前に作成した**旧テンプレートの参照用**。仕様書を読み込める最小構成の例として利用し、**本項のシート構成を正式版**として `templates/stateflow_input_v1.xlsx` を実装時に新規生成すること。
+- 同梱の `references/standard_input_template_legacy.xlsx` は、旧テンプレート由来の参照サンプル。現行の必須シート `Outputs` / `Events` と `priority` を追加済みだが、列定義と正式サンプルは `templates/stateflow_input_v1.xlsx` を正とする。
 - 複数の `.xlsx` を同時読み込み可能。各ブックには必要なシートだけを配置してもよいが、最終的な統合モデルでは下記のキーが満たされること。
 - 全シートで1行目は固定カラム名、2行目以降がデータ。セル結合、1セルに複数ルール、図・色で意味を表す入力は禁止。未定義列は無視ではなく明確に警告（将来拡張を見込む場合は `x_` prefix列だけ許可）。
 - ルールの条件文は**Excel計算式ではない**。アプリのDSLとしてパース。空文字や未知参照を曖昧に解釈しない。

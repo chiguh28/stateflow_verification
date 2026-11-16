@@ -59,6 +59,8 @@ STATEFLOWは、複数の状態遷移Excelを統合し、入力イベント1件�
 
 [標準入力テンプレート v1](../templates/stateflow_input_v1.xlsx)は架空のAC → LINK → HEATERモデルを含む、直接取り込めるサンプルである。6シートに必要列・例・header commentsを入れている。新規Excelの雛形としてコピーし、ID・状態・ガード・イベント・出典を実仕様へ置き換える。
 
+旧形式を基にした[参照ブック](../references/standard_input_template_legacy.xlsx)にも`Outputs` / `Events`と必須priorityを追加した。新規入力Excelを作る場合は引き続きv1テンプレートを使う。
+
 この例の `STATE.AC` と `STATE.LINK` の参照を解決するには、取込後にGraph画面で`AC → LINK (CURRENT)`と`LINK → HEATER (CURRENT)`を手動接続する。自動配線しないことは仕様である。未接続診断は2種類の必須辺に対し、各辺を参照する2ルールずつ計4件出る。旧形式は[legacy reference](../references/standard_input_template_legacy.xlsx)。
 
 ## 開発・検証コマンド

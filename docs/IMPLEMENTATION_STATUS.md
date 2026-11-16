@@ -7,6 +7,7 @@
 - [x] **Phase 8 — Windows配布ZIP**: v0.0.1 ZIPにEXEとMSIを同梱し、内容・サイズ・SHA-256を確認してGitHub Releaseを更新。単体MSI assetは削除し、ReleaseをZIPのみとした。
 - [x] **Phase 9 — Windows開発環境の初回起動**: clone手順をREADMEに記載し、wingetでMSVC Build Tools / Rust MSVC / Node LTS / 必要時のWebView2を用意して起動するBATとPowerShellスクリプトを追加。既存環境での起動を確認。
 - [x] **Phase 10 — 再現確認と記録**: 起動スクリプトの既存環境経路、READMEのコマンド、ZIPの2成果物を確認し、結果を`docs/TEST_REPORT.md`へ記録。新規PCでのwinget導入経路は未確認。
+- [x] **Phase 11 — 参照Excel入力定義の補完**: `references/standard_input_template_legacy.xlsx` に`Outputs` / `Events`を追加し、現行必須の`priority`値を設定。サンプルの遷移条件は維持。
 
 ## 全体状況
 
@@ -28,6 +29,7 @@ Rust + Tauri 2 + React/TypeScript のアプリ実装、Windows用MSI/NSISビル�
 - [x] `docs/AI_HANDOFF.md` — 別AI向けのコードマップ、守る契約、現状の未完了点、再開手順を整理。
 - [x] `docs/ARCHITECTURE.md` — 実装済み責務、データフロー、解析・保存・IPC設計をソース位置つきで整理。
 - [x] `templates/stateflow_input_v1.xlsx` — 仕様書4章の6シート形式で作成。Excel取込テストに追加し、手動グラフ接続が必要なサンプルとして検証。
+- [x] `references/standard_input_template_legacy.xlsx` — `Outputs` / `Events` とpriorityを追加し、既存の参照例を現行必須シート込みに更新。
 
 ## 主要契約の実装
 
