@@ -60,8 +60,23 @@ Cargoのscale test記録: 理論上10,485,760セル。全件要求は50,000セ�
 - EXE: `target/release-v0.0.1/release/stateflow.exe`（11,700,224 bytes、SHA-256 `C014AC447E25EB81170FC90835561943C2EDF4FBBA68617E453FF01E55C427ED`）
 - NSIS: `target/release-v0.0.1/release/bundle/nsis/STATEFLOW_0.0.1_x64-setup.exe`（2,740,213 bytes）
 - MSI: `target/release-v0.0.1/release/bundle/msi/STATEFLOW_0.0.1_x64_en-US.msi`（4,046,848 bytes）
+- GitHub Release ZIP: `STATEFLOW_0.0.1_x64.zip`（7,750,471 bytes、SHA-256 `29927780F69DFD4EEB851A894C872E65B0392CB260E4525B4F2D9D70727E6900`）。`stateflow.exe`と`STATEFLOW_0.0.1_x64_en-US.msi`の2ファイルを含み、GitHubから取得したZIPでもサイズ・SHA-256・内容を照合した。
+- ZIP内のEXE SHA-256: `C014AC447E25EB81170FC90835561943C2EDF4FBBA68617E453FF01E55C427ED`。MSI SHA-256: `04CECBCBFE5C619EFE307B20CDEBFF01A5A0C5D9918A9CE8855FB17D091B573C`。GitHub ReleaseはこのZIP assetのみとし、単体MSI assetは削除した。
 - 1602×1032のUI手動スモークは版0.1.0のリリースアプリで実施。v0.0.1は版番号変更後のコードを新しいtarget directoryへリビルドし、exe/MSI/NSISを生成した。v0.0.1 exeの再起動スモークはまだ行っていない。
 - インストーラー自体の実インストール手順はまだ試していない。
+
+## Windows初回セットアップの追加検証（2026-11-16）
+
+- `setup-and-run.bat`をWindows PowerShell 5.1から実行。既存のVisual Studio C++ Build Tools / Rust MSVC / Node.js / WebView2を検出し、npm依存導入後にTauri開発版の起動まで成功した。Viteは`http://127.0.0.1:1420/`でReadyになり、Tauriは`target/debug/stateflow.exe`を起動した。起動確認後、テストプロセスをCtrl+Cで停止した。
+- この端末には前提ツールが既にあったため、wingetによる新規MSVC / Rustup / Node.js / WebView2導入、UAC、クリーンWindowsでの初回起動は未確認。初回依存導入`npm ci`は125 packagesを追加し、126 packagesを監査、脆弱性0件。
+- `npm run typecheck`: PASS。
+- `npm test`: PASS、1 test。
+- `npm run build`: PASS。既存と同じ503.02 kB chunk size advisory。
+- `cargo fmt --all -- --check`: PASS。
+- `cargo test -p stateflow-core`: PASS、unit 11 + Golden integration 8 + workbook importer 3 + lazy scale 1 = 23件。増分キャッシュでhard linkが使えずcopyへ切り替える警告が1件。
+- `cargo clippy -p stateflow-core --all-targets -- -D warnings`: PASS。
+- `git diff --check`: PASS。
+- PowerShell 7のparser check: PASS。BAT経由でWindows PowerShell 5.1の実行とTauri dev起動も確認した。
 
 ## 未確認・制約
 

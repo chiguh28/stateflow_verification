@@ -2,6 +2,12 @@
 
 更新日: 2026-11-16（Asia/Tokyo）
 
+## 2026-11-16 追加作業チェックリスト
+
+- [x] **Phase 8 — Windows配布ZIP**: v0.0.1 ZIPにEXEとMSIを同梱し、内容・サイズ・SHA-256を確認してGitHub Releaseを更新。単体MSI assetは削除し、ReleaseをZIPのみとした。
+- [x] **Phase 9 — Windows開発環境の初回起動**: clone手順をREADMEに記載し、wingetでMSVC Build Tools / Rust MSVC / Node LTS / 必要時のWebView2を用意して起動するBATとPowerShellスクリプトを追加。既存環境での起動を確認。
+- [x] **Phase 10 — 再現確認と記録**: 起動スクリプトの既存環境経路、READMEのコマンド、ZIPの2成果物を確認し、結果を`docs/TEST_REPORT.md`へ記録。新規PCでのwinget導入経路は未確認。
+
 ## 全体状況
 
 Rust + Tauri 2 + React/TypeScript のアプリ実装、Windows用MSI/NSISビルド、Golden workbookを用いた手動スモークを行った。仕様書11章の全受入項目はまだ確認できていないため、**最終受入は未完了**として扱う。

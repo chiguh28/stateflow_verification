@@ -71,3 +71,11 @@
 - **採用判断:** `docs/ARCHITECTURE.md`に責務・データフロー・解析契約とコードマップを、`docs/AI_HANDOFF.md`に実装済み範囲・既知差分・再開手順を記録する。仕様書とv6 HTMLを置き換えず、未達と差分も明示する。
 - **理由:** 次のAIが、機能意図をソース全体から再構築したり、プロトタイプのダミー処理を本番仕様として誤読したりする時間を減らす。
 - **残るリスク:** コード変更時に資料が古くなる。解析やExcel契約を変更したPRでは本書と引き継ぎ書も更新する。
+
+### D-010: Windows初回起動はBATからPowerShellセットアップを呼び出す
+
+- **背景:** clone直後のWindows環境にはTauri開発に必要なMSVC、Rust MSVC toolchain、Node.jsが揃っているとは限らない。手動導入だけでは初回起動までの手順が分散する。
+- **採用判断:** リポジトリ直下の`setup-and-run.bat`から`scripts/setup-and-run.ps1`を実行し、wingetでVisual Studio 2022 C++ Build Tools（推奨コンポーネントを含む）、Rustup、Node.js LTSを用意する。WebView2 Runtimeが見つからない場合だけwingetから追加する。npm lockfileのハッシュに応じて`npm ci`を行い、Visual Studioの`vcvars64.bat`環境でTauriを開発起動する。
+- **理由:** BATだけに依存管理、Visual Studio環境の取込、再実行時の依存判定を詰め込まず、Windows PowerShell 5.1で読める個別処理として保守できる。Rustの既定toolchainを変えず、起動プロセスだけMSVC toolchainを選ぶ。
+- **制約:** Windows 10/11、winget、ネット接続が必要。Visual Studio Build Toolsの導入時はUAC承認と数GBの空き容量が必要。組織ポリシーやオフライン環境では自動導入できない。
+- **残るリスク:** clean Windows環境でのwinget初回インストールは、この開発機では再現できないため別環境で確認が必要。WebView2 Runtimeは多くのWindows 10/11に同梱されるが、ランタイム未導入環境では追加ダウンロードが発生する。
